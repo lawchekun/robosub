@@ -27,6 +27,10 @@ RUN apt-get update \
     && apt-get install ros-melodic-image-pipeline ros-melodic-rqt -y # For image_view \
     && rosmake image_view rqt
 
+# Install pip and pip dependencies
+RUN apt install -y python-pip \
+    && pip install https://pypi.python.org/packages/source/g/getch/getch-1.0-python2.tar.gz#md5=586ea0f1f16aa094ff6a30736ba03c50  # Python2 version of getch. Without this, pip sometimes tries to install the python3 version
+
 # Add setup files to bashrc
 RUN echo source /opt/ros/melodic/setup.bash >> /root/.bashrc \
     && echo source /root/catkin_ws/devel/setup.bash >> /root/.bashrc
